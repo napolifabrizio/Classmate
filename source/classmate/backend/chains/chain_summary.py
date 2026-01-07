@@ -34,9 +34,10 @@ class ChainSummary:
         self._chat = ChatOpenAI()
         self._prompt = Prompt()
 
-    def generate_summary(self, transcription: str):
-        prompt = self._prompt.prompt_summary_transcription.format(transcription=transcription)
-        res = self._chat.invoke(prompt)
+    def generate_summary(self, transcription: str) -> str | list[str | dict]:
+        prompt = self._prompt.prompt_summary_transcription
+        chain = prompt | self._chat
+        res = chain.invoke({"human": transcription})
         return res.content
 
 if __name__ == "__main__":
