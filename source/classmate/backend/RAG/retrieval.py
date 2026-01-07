@@ -6,7 +6,7 @@ from langchain_openai import ChatOpenAI
 class Retrieval:
     def __init__(self):
         self._vectorDB = VectorDB()
-        self._chat = ChatOpenAI()
+        self._chat = ChatOpenAI(model="gpt-4o-mini")
 
     def filter_area_metadata(self, area: str):
         retriever_filter = {'area': {'$in': [area]}}
